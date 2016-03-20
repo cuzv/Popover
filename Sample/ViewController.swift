@@ -30,8 +30,12 @@ class ViewController: UIViewController {
     }
     
     func add(sender: UIBarButtonItem) {
-        let controller = PopoverController(items: makeItems(), fromView: rightTopButton, direction: .Down, style: .WithImage)
-        popover(controller)        
+        if popoverDidAppear {
+            dismissPopover()
+        } else {
+            let controller = PopoverController(items: makeItems(), fromView: rightTopButton, direction: .Down, style: .WithImage)
+            popover(controller)
+        }
     }
     
     

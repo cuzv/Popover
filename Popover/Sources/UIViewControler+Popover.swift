@@ -28,6 +28,19 @@ import UIKit
 
 public extension UIViewController {    
     public func popover(controller: PopoverController) {
+        func assertFromView(fromView: UIView) {
+            var view: UIView? = fromView
+            while (nil != view) {
+                if view == view {
+                    return
+                } else {
+                    view = view?.superview
+                }
+            }
+            
+            fatalError("fromView: \(fromView) must be descendant of self.view")
+        }
+        
         assertFromView(controller.fromView)
                 
         let popoverView = PopoverView(controller, commonSuperView: view)
@@ -55,16 +68,11 @@ public extension UIViewController {
         popoverView.addConstraints()        
     }
     
-    private func assertFromView(fromView: UIView) {
-        var view: UIView? = fromView
-        while (nil != view) {
-            if view == view {
-                return
-            } else {
-                view = view?.superview
-            }
-        }
-        
-        fatalError("fromView: \(fromView) must be descendant of self.view")
+    public func dismissPopover() {
+        self.popoverView?.dismiss()
+    }
+    
+    public var popoverDidAppear: Bool {
+        return nil != popoverView?.superview
     }
 }

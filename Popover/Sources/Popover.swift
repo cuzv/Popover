@@ -47,10 +47,15 @@ internal struct AssociationKey {
     internal static var PopoverView: String = "PopoverView"
 }
 
+/// Convert a `void *` type to Swift type, use this function carefully
+private func convertUnsafePointerToSwiftType<T>(value: UnsafePointer<Void>) -> T {
+    return unsafeBitCast(value, UnsafePointer<T>.self).memory
+}
+
 internal extension UIViewController {
-    internal var popoverView: PopoverView {
-        get { return objc_getAssociatedObject(self, &AssociationKey.PopoverView) as! PopoverView }
-        set { objc_setAssociatedObject(self, &AssociationKey.PopoverView, newValue, .OBJC_ASSOCIATION_ASSIGN) }
+    internal var popoverView: PopoverView? {
+        get { return objc_getAssociatedObject(self, &AssociationKey.PopoverView) as? PopoverView }
+        set { objc_setAssociatedObject(self, &AssociationKey.PopoverView, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
     }
 }
 

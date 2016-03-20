@@ -86,7 +86,11 @@ public class PopoverView: UIView {
     }
 
     public init(_ host: PopoverController, commonSuperView: UIView) {
-        self.items = host.items
+        if host.reverseHorizontalCoordinates {
+            self.items = host.items.reverse()
+        } else {
+            self.items = host.items
+        }
         self.fromView = host.fromView
         self.direction = host.direction
         self.reverseHorizontalCoordinates = host.reverseHorizontalCoordinates
