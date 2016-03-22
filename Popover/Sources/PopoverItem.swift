@@ -43,7 +43,7 @@ public final class PopoverItem {
 
 #if DEBUG
     deinit {
-        debugPrint("\(__FILE__):\(__LINE__):\(self.dynamicType):\(__FUNCTION__)")
+        debugPrint("\(#file):\(#line):\(self.dynamicType):\(#function)")
     }
 #endif
 }

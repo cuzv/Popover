@@ -26,7 +26,7 @@ class ViewController: UIViewController {
         
         view.backgroundColor = UIColor.lightGrayColor()
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("add:"))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(ViewController.add(_:)))
     }
     
     func add(sender: UIBarButtonItem) {
@@ -74,8 +74,5 @@ class ViewController: UIViewController {
         let controller = PopoverController(items: makeItems(), fromView: rightBottomButton, direction: .Up, reverseHorizontalCoordinates: true)
         popover(controller)
     }
-    
-
-
 }
 
