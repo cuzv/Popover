@@ -1,6 +1,6 @@
 //
 //  ArrowView.swift
-//  Popover
+//  PopoverSwift
 //
 //  Created by Moch Xiao on 3/19/16.
 //  Copyright © 2016 mochxiao.com. All rights reserved.

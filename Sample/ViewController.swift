@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Popover
+import PopoverSwift
 
 class ViewController: UIViewController {
 

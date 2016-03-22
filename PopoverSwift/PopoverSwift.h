@@ -1,6 +1,6 @@
 //
-//  PopoverItem.swift
-//  Popover
+//  PopoverSwift.h
+//  PopoverSwift
 //
 //  Created by Moch Xiao on 3/18/16.
 //  Copyright © @2016 Moch Xiao (http://mochxiao.com).
@@ -24,26 +24,14 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
+#import <UIKit/UIKit.h>
 
-public final class PopoverItem {
-    public let title: String
-    public let titleColor: UIColor
-    public let image: UIImage?
-    public let handler: ((PopoverItem) -> Void)?
-    var coverColor: UIColor?
-    var textColor: UIColor?
-    
-    public init(title: String, titleColor: UIColor = UIColor.blackColor(), image: UIImage? = nil, handler: ((PopoverItem) -> Void)? = nil) {
-        self.title = title
-        self.titleColor = titleColor
-        self.image = image
-        self.handler = handler
-    }
+//! Project version number for PopoverSwift.
+FOUNDATION_EXPORT double PopoverVersionNumber;
 
-#if DEBUG
-    deinit {
-        debugPrint("\(#file):\(#line):\(self.dynamicType):\(#function)")
-    }
-#endif
-}
+//! Project version string for PopoverSwift.
+FOUNDATION_EXPORT const unsigned char PopoverVersionString[];
+
+// In this header, you should import all the public headers of your framework using statements like #import <PopoverSwift/PublicHeader.h>
+
+

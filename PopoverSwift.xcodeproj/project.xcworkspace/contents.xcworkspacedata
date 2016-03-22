@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Popover.xcodeproj">
+      location = "self:/Users/Moch/Github/Popover/PopoverSwift.xcodeproj">
    </FileRef>
 </Workspace>

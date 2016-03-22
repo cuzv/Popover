@@ -15,6 +15,8 @@ Popover is an UIPopoverController like control for iOS.
 ### How to use
 
 ```swift
+import PopoverSwift
+
 // In view controller
 let image = UIImage(named: "collection_hightlight")
 let item0 = PopoverItem(title: "发起群聊", image: image) { debugPrint($0.title) }

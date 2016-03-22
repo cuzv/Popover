@@ -1,6 +1,6 @@
 //
-//  Popover.swift
-//  Popover
+//  PopoverSwift.swift
+//  PopoverSwift
 //
 //  Created by Moch Xiao on 3/18/16.
 //  Copyright © @2016 Moch Xiao (http://mochxiao.com).

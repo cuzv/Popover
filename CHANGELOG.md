@@ -7,3 +7,6 @@
 ### 0.2.1
 
 - 支持 Xcode 7.3 & Swift 2.2
+### 0.3
+
+- Pod 名由 Popover.swift 改为 PopoverSwift
