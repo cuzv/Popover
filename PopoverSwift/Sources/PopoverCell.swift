@@ -26,10 +26,10 @@
 
 import UIKit
 
-final class PopoverCell: UITableViewCell {
+internal final class PopoverCell: UITableViewCell {
     static let identifier: String = "PopoverCell"
-    
-    lazy var contentLabel: UILabel = {
+
+    private let contentLabel: UILabel = {
         let label = UILabel()
         label.font = CellLabelFont
         label.lineBreakMode = .ByCharWrapping
@@ -41,7 +41,6 @@ final class PopoverCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         setupUserInterface()
     }
 
@@ -49,14 +48,6 @@ final class PopoverCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-#if DEBUG
-    deinit {
-        debugPrint("\(#file):\(#line):\(self.dynamicType):\(#function)")
-    }
-#endif
-}
-
-extension PopoverCell {
     private func setupUserInterface() {
         separatorInset = UIEdgeInsetsMake(0, 15, 0, 15)
         backgroundColor = UIColor.clearColor()
@@ -79,22 +70,28 @@ extension PopoverCell {
             )
         )
     }
-
+    
     func setupData(data: PopoverItem) {
         contentLabel.text = data.title
         if let textColor = data.textColor {
             contentLabel.textColor = textColor
         }
         
-        contentView.backgroundColor = data.coverColor ?? UIColor.whiteColor()        
+        contentView.backgroundColor = data.coverColor ?? UIColor.whiteColor()
     }
+
+#if DEBUG
+    deinit {
+        debugPrint("\(#file):\(#line):\(self.dynamicType):\(#function)")
+    }
+#endif
 }
 
 
 final class PopoverWihtImageCell: UITableViewCell {
     static let identifier: String = "PopoverWihtImageCell"
     
-    lazy var contentLabel: UILabel = {
+    internal let contentLabel: UILabel = {
         let label = UILabel()
         label.font = CellLabelFont
         label.lineBreakMode = .ByCharWrapping
@@ -103,7 +100,7 @@ final class PopoverWihtImageCell: UITableViewCell {
         return label
     }()
     
-    let leftImageView: UIImageView = {
+    internal let leftImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .ScaleAspectFill
@@ -115,22 +112,13 @@ final class PopoverWihtImageCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         setupUserInterface()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-#if DEBUG
-    deinit {
-        debugPrint("\(#file):\(#line):\(self.dynamicType):\(#function)")
-    }
-#endif
-}
 
-extension PopoverWihtImageCell {
     private func setupUserInterface() {
         separatorInset = UIEdgeInsetsMake(0, 15, 0, 15)
         backgroundColor = UIColor.clearColor()
@@ -152,7 +140,7 @@ extension PopoverWihtImageCell {
                 metrics: nil,
                 views: ["contentLabel": contentLabel]
             )
-        )        
+        )
         contentView.addConstraint(
             NSLayoutConstraint(
                 item: leftImageView,
@@ -174,6 +162,12 @@ extension PopoverWihtImageCell {
         leftImageView.image = data.image
         contentView.backgroundColor = data.coverColor ?? UIColor.whiteColor()
     }
+
+#if DEBUG
+    deinit {
+        debugPrint("\(#file):\(#line):\(self.dynamicType):\(#function)")
+    }
+#endif
 }
 
 
