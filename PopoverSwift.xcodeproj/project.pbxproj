@@ -20,7 +20,33 @@
 		4660446F1CA132EA001293FE /* PopoverItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466044671CA132EA001293FE /* PopoverItem.swift */; };
 		466044701CA132EA001293FE /* PopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466044681CA132EA001293FE /* PopoverView.swift */; };
 		466044711CA132EA001293FE /* UIViewControler+Popover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466044691CA132EA001293FE /* UIViewControler+Popover.swift */; };
+		46D2D6F21CF57FF700D845EB /* PopoverSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4615EE521C9B0D7F00509981 /* PopoverSwift.framework */; };
+		46D2D6F31CF57FF700D845EB /* PopoverSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4615EE521C9B0D7F00509981 /* PopoverSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		46D2D6F41CF57FF700D845EB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4615EE491C9B0D7F00509981 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4615EE511C9B0D7F00509981;
+			remoteInfo = PopoverSwift;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		46D2D6F61CF57FF800D845EB /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				46D2D6F31CF57FF700D845EB /* PopoverSwift.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4615EE521C9B0D7F00509981 /* PopoverSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PopoverSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46D2D6F21CF57FF700D845EB /* PopoverSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,10 +181,12 @@
 				4615EE661C9B114E00509981 /* Sources */,
 				4615EE671C9B114E00509981 /* Frameworks */,
 				4615EE681C9B114E00509981 /* Resources */,
+				46D2D6F61CF57FF800D845EB /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				46D2D6F51CF57FF700D845EB /* PBXTargetDependency */,
 			);
 			name = Sample;
 			productName = Sample;
@@ -246,6 +275,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		46D2D6F51CF57FF700D845EB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4615EE511C9B0D7F00509981 /* PopoverSwift */;
+			targetProxy = 46D2D6F41CF57FF700D845EB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		4615EE701C9B114E00509981 /* Main.storyboard */ = {
@@ -399,6 +436,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Sample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "";
@@ -411,6 +449,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Sample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "";
