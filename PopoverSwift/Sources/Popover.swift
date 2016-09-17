@@ -87,10 +87,12 @@ internal func drawArrawImageIn(
     arrawHeight: CGFloat = 10,
     cornerRadius: CGFloat = 6,
     handstand: Bool = false
-    ) -> UIImage
+    ) -> UIImage?
 {
     UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
-    let context = UIGraphicsGetCurrentContext()
+    guard let context = UIGraphicsGetCurrentContext() else {
+        return nil
+    }
 
     if handstand {
         CGContextSetTextMatrix(context, CGAffineTransformIdentity)
@@ -126,5 +128,5 @@ internal func drawArrawImageIn(
     
     UIGraphicsEndImageContext()
     
-    return output
+    return output!
 }

@@ -85,15 +85,15 @@ internal func drawArrawImageIn(
     let context = UIGraphicsGetCurrentContext()
     
     if handstand {
-        CGContextSetTextMatrix(context, CGAffineTransformIdentity)
-        CGContextTranslateCTM(context, 0, CGRectGetHeight(rect))
-        CGContextScaleCTM(context, 1.0, -1.0)
+        CGContextSetTextMatrix(context!, CGAffineTransformIdentity)
+        CGContextTranslateCTM(context!, 0, CGRectGetHeight(rect))
+        CGContextScaleCTM(context!, 1.0, -1.0)
     }
     
     // Perform the drawing
-    CGContextSetLineWidth(context, lineWidth)
-    CGContextSetStrokeColorWithColor(context, strokeColor.CGColor)
-    CGContextSetFillColorWithColor(context, fillColor.CGColor)
+    CGContextSetLineWidth(context!, lineWidth)
+    CGContextSetStrokeColorWithColor(context!, strokeColor.CGColor)
+    CGContextSetFillColorWithColor(context!, fillColor.CGColor)
     
     let path = CGPathCreateMutable()
     let lineHalfWidth = lineWidth / 2.0
@@ -117,13 +117,13 @@ internal func drawArrawImageIn(
     CGPathAddLineToPoint(path, nil, arrawCenterX + arrawHalfWidth, arrawHeight + lineWidth)
     CGPathCloseSubpath(path)
     
-    CGContextAddPath(context, path)
-    CGContextDrawPath(context, .FillStroke)
+    CGContextAddPath(context!, path)
+    CGContextDrawPath(context!, .FillStroke)
     
     let output = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
     
-    return output
+    return output!
 }
 
 

@@ -10,8 +10,6 @@ Popover is an UIPopoverController like control for iOS.
 
 </p>
 
-
-
 ### How to use
 
 ```swift
@@ -28,3 +26,8 @@ let items = [item0, item1, item2, item3]
 let controller = PopoverController(items: items, fromView: rightTopButton, direction: .Down, style: .WithImage)
 popover(controller)        
 ```
+### Notice
+
+-   v0.x for swift 2.2
+-   v1.x for swift2.3
+-   v2.x for swift3.x
