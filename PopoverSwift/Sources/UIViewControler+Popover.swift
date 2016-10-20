@@ -27,8 +27,8 @@
 import UIKit
 
 public extension UIViewController {    
-    public func popover(controller: PopoverController) {
-        func assertFromView(fromView: UIView) {
+    public func popover(_ controller: PopoverController) {
+        func assertFromView(_ fromView: UIView) {
             var view: UIView? = fromView
             while (nil != view) {
                 if view == view {
@@ -49,17 +49,17 @@ public extension UIViewController {
         self.popoverView = popoverView
         
         view.addConstraints(
-            NSLayoutConstraint.constraintsWithVisualFormat(
-                "|[popoverView]|",
-                options: NSLayoutFormatOptions.DirectionLeadingToTrailing,
+            NSLayoutConstraint.constraints(
+                withVisualFormat: "|[popoverView]|",
+                options: NSLayoutFormatOptions(),
                 metrics: nil,
                 views: ["popoverView": popoverView]
             )
         )
         view.addConstraints(
-            NSLayoutConstraint.constraintsWithVisualFormat(
-                "V:|[popoverView]|",
-                options: NSLayoutFormatOptions.DirectionLeadingToTrailing,
+            NSLayoutConstraint.constraints(
+                withVisualFormat: "V:|[popoverView]|",
+                options: NSLayoutFormatOptions(),
                 metrics: nil,
                 views: ["popoverView": popoverView]
             )

@@ -24,7 +24,7 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
+import UIKit
 
 public final class PopoverController {
     internal let items: [PopoverItem]
@@ -51,9 +51,9 @@ public final class PopoverController {
     public init(
         items: [PopoverItem],
         fromView: UIView,
-        direction: Direction = .Down,
+        direction: Direction = .down,
         reverseHorizontalCoordinates: Bool = false,
-        style: PopoverStyle = .Normal)
+        style: PopoverStyle = .normal)
     {
         self.items = items
         self.fromView = fromView
@@ -64,7 +64,7 @@ public final class PopoverController {
     
 #if DEBUG
     deinit {
-        debugPrint("\(#file):\(#line):\(self.dynamicType):\(#function)")
+        debugPrint("\(#file):\(#line):\(type(of: self)):\(#function)")
     }
 #endif
 }

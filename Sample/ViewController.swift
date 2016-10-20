@@ -24,16 +24,16 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.lightGrayColor()
+        view.backgroundColor = UIColor.lightGray
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(ViewController.add(_:)))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(ViewController.add(_:)))
     }
     
-    func add(sender: UIBarButtonItem) {
+    func add(_ sender: UIBarButtonItem) {
         if popoverDidAppear {
             dismissPopover()
         } else {
-            let controller = PopoverController(items: makeItems(), fromView: rightTopButton, direction: .Down, style: .WithImage)
+            let controller = PopoverController(items: makeItems(), fromView: rightTopButton, direction: .down, style: .withImage)
             popover(controller)
         }
     }
@@ -48,30 +48,30 @@ class ViewController: UIViewController {
         return [item0, item1, item2, item3]
     }
 
-    @IBAction func centerTopAction(sender: AnyObject) {
-        let controller = PopoverController(items: makeItems(), fromView: centerButton, style: .WithImage)
-        controller.coverColor = UIColor.grayColor()
-        controller.textColor = UIColor.whiteColor()
+    @IBAction func centerTopAction(_ sender: AnyObject) {
+        let controller = PopoverController(items: makeItems(), fromView: centerButton, style: .withImage)
+        controller.coverColor = UIColor.gray
+        controller.textColor = UIColor.white
         popover(controller)
     }
 
-    @IBAction func leftTopAction(sender: AnyObject) {
-        let controller = PopoverController(items: makeItems(), fromView: leftTopButton, direction: .Down)
+    @IBAction func leftTopAction(_ sender: AnyObject) {
+        let controller = PopoverController(items: makeItems(), fromView: leftTopButton, direction: .down)
         popover(controller)
     }
 
-    @IBAction func rightTopAction(sender: AnyObject) {
-        let controller = PopoverController(items: makeItems(), fromView: rightTopButton, direction: .Down, style: .WithImage)
+    @IBAction func rightTopAction(_ sender: AnyObject) {
+        let controller = PopoverController(items: makeItems(), fromView: rightTopButton, direction: .down, style: .withImage)
         popover(controller)
     }
     
-    @IBAction func leftBottomAction(sender: AnyObject) {
-        let controller = PopoverController(items: makeItems(), fromView: leftBottomButton, direction: .Up, reverseHorizontalCoordinates: true)
+    @IBAction func leftBottomAction(_ sender: AnyObject) {
+        let controller = PopoverController(items: makeItems(), fromView: leftBottomButton, direction: .up, reverseHorizontalCoordinates: true)
         popover(controller)
     }
     
-    @IBAction func rightBottomAction(sender: AnyObject) {
-        let controller = PopoverController(items: makeItems(), fromView: rightBottomButton, direction: .Up, reverseHorizontalCoordinates: true)
+    @IBAction func rightBottomAction(_ sender: AnyObject) {
+        let controller = PopoverController(items: makeItems(), fromView: rightBottomButton, direction: .up, reverseHorizontalCoordinates: true)
         popover(controller)
     }
 }

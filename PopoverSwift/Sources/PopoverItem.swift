@@ -34,7 +34,7 @@ public final class PopoverItem {
     var coverColor: UIColor?
     var textColor: UIColor?
     
-    public init(title: String, titleColor: UIColor = UIColor.blackColor(), image: UIImage? = nil, handler: ((PopoverItem) -> Void)? = nil) {
+    public init(title: String, titleColor: UIColor = UIColor.black, image: UIImage? = nil, handler: ((PopoverItem) -> Void)? = nil) {
         self.title = title
         self.titleColor = titleColor
         self.image = image
@@ -43,7 +43,7 @@ public final class PopoverItem {
 
 #if DEBUG
     deinit {
-        debugPrint("\(#file):\(#line):\(self.dynamicType):\(#function)")
+        debugPrint("\(#file):\(#line):\(type(of: self)):\(#function)")
     }
 #endif
 }

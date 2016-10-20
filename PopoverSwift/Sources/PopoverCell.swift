@@ -29,13 +29,13 @@ import UIKit
 internal final class PopoverCell: UITableViewCell {
     static let identifier: String = "PopoverCell"
 
-    private let contentLabel: UILabel = {
+    fileprivate let contentLabel: UILabel = {
         let label = UILabel()
         label.font = CellLabelFont
-        label.lineBreakMode = .ByCharWrapping
-        label.textAlignment = .Center
+        label.lineBreakMode = .byCharWrapping
+        label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = UIColor.clearColor()
+        label.backgroundColor = UIColor.clear
         return label
     }()
     
@@ -48,41 +48,41 @@ internal final class PopoverCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func setupUserInterface() {
+    fileprivate func setupUserInterface() {
         separatorInset = UIEdgeInsetsMake(0, 15, 0, 15)
-        backgroundColor = UIColor.clearColor()
+        backgroundColor = UIColor.clear
         
         contentView.addSubview(contentLabel)
         contentView.addConstraints(
-            NSLayoutConstraint.constraintsWithVisualFormat(
-                "|-\(Leading)-[contentLabel]-\(Leading)-|",
-                options: NSLayoutFormatOptions.DirectionLeadingToTrailing,
+            NSLayoutConstraint.constraints(
+                withVisualFormat: "|-\(Leading)-[contentLabel]-\(Leading)-|",
+                options: NSLayoutFormatOptions(),
                 metrics: nil,
                 views: ["contentLabel": contentLabel]
             )
         )
         contentView.addConstraints(
-            NSLayoutConstraint.constraintsWithVisualFormat(
-                "V:|-0-[contentLabel]-0-|",
-                options: NSLayoutFormatOptions.DirectionLeadingToTrailing,
+            NSLayoutConstraint.constraints(
+                withVisualFormat: "V:|-0-[contentLabel]-0-|",
+                options: NSLayoutFormatOptions(),
                 metrics: nil,
                 views: ["contentLabel": contentLabel]
             )
         )
     }
     
-    func setupData(data: PopoverItem) {
+    func setupData(_ data: PopoverItem) {
         contentLabel.text = data.title
         if let textColor = data.textColor {
             contentLabel.textColor = textColor
         }
         
-        contentView.backgroundColor = data.coverColor ?? UIColor.whiteColor()
+        contentView.backgroundColor = data.coverColor ?? UIColor.white
     }
 
 #if DEBUG
     deinit {
-        debugPrint("\(#file):\(#line):\(self.dynamicType):\(#function)")
+        debugPrint("\(#file):\(#line):\(type(of: self)):\(#function)")
     }
 #endif
 }
@@ -94,18 +94,18 @@ final class PopoverWihtImageCell: UITableViewCell {
     internal let contentLabel: UILabel = {
         let label = UILabel()
         label.font = CellLabelFont
-        label.lineBreakMode = .ByCharWrapping
+        label.lineBreakMode = .byCharWrapping
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = UIColor.clearColor()
+        label.backgroundColor = UIColor.clear
         return label
     }()
     
     internal let leftImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .ScaleAspectFill
+        imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.backgroundColor = UIColor.clearColor()
+        imageView.backgroundColor = UIColor.clear
         return imageView
     }()
     
@@ -119,24 +119,24 @@ final class PopoverWihtImageCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func setupUserInterface() {
+    fileprivate func setupUserInterface() {
         separatorInset = UIEdgeInsetsMake(0, 15, 0, 15)
-        backgroundColor = UIColor.clearColor()
+        backgroundColor = UIColor.clear
         
         contentView.addSubview(contentLabel)
         contentView.addSubview(leftImageView)
         contentView.addConstraints(
-            NSLayoutConstraint.constraintsWithVisualFormat(
-                "|-\(Leading)-[leftImageView(\(ImageWidth))]-\(Spacing)-[contentLabel]-\(Leading)-|",
-                options: NSLayoutFormatOptions.DirectionLeadingToTrailing,
+            NSLayoutConstraint.constraints(
+                withVisualFormat: "|-\(Leading)-[leftImageView(\(ImageWidth))]-\(Spacing)-[contentLabel]-\(Leading)-|",
+                options: NSLayoutFormatOptions(),
                 metrics: nil,
                 views: ["contentLabel": contentLabel, "leftImageView": leftImageView]
             )
         )
         contentView.addConstraints(
-            NSLayoutConstraint.constraintsWithVisualFormat(
-                "V:|-0-[contentLabel]-0-|",
-                options: NSLayoutFormatOptions.DirectionLeadingToTrailing,
+            NSLayoutConstraint.constraints(
+                withVisualFormat: "V:|-0-[contentLabel]-0-|",
+                options: NSLayoutFormatOptions(),
                 metrics: nil,
                 views: ["contentLabel": contentLabel]
             )
@@ -144,28 +144,28 @@ final class PopoverWihtImageCell: UITableViewCell {
         contentView.addConstraint(
             NSLayoutConstraint(
                 item: leftImageView,
-                attribute: .CenterY,
-                relatedBy: .Equal,
+                attribute: .centerY,
+                relatedBy: .equal,
                 toItem: contentLabel,
-                attribute: .CenterY,
+                attribute: .centerY,
                 multiplier: 1,
                 constant: 0
             )
         )
     }
     
-    func setupData(data: PopoverItem) {
+    func setupData(_ data: PopoverItem) {
         contentLabel.text = data.title
         if let textColor = data.textColor {
             contentLabel.textColor = textColor
         }
         leftImageView.image = data.image
-        contentView.backgroundColor = data.coverColor ?? UIColor.whiteColor()
+        contentView.backgroundColor = data.coverColor ?? UIColor.white
     }
 
 #if DEBUG
     deinit {
-        debugPrint("\(#file):\(#line):\(self.dynamicType):\(#function)")
+        debugPrint("\(#file):\(#line):\(type(of: self)):\(#function)")
     }
 #endif
 }

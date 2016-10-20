@@ -26,14 +26,14 @@
 
 import UIKit
 
-public class PopoverView: UIView {
-    private let items: [PopoverItem]
-    private let fromView: UIView
-    private let direction: Direction
-    private let reverseHorizontalCoordinates: Bool
-    private let style: PopoverStyle
+open class PopoverView: UIView {
+    fileprivate let items: [PopoverItem]
+    fileprivate let fromView: UIView
+    fileprivate let direction: Direction
+    fileprivate let reverseHorizontalCoordinates: Bool
+    fileprivate let style: PopoverStyle
     
-    private weak var commonSuperView: UIView!
+    fileprivate weak var commonSuperView: UIView!
     
     let arrawView: UIImageView = {
         let view = UIImageView()
@@ -42,12 +42,12 @@ public class PopoverView: UIView {
     }()
     
     let tableView: UITableView = {
-        let tableView = UITableView(frame: CGRectZero, style: .Plain)
+        let tableView = UITableView(frame: CGRect.zero, style: .plain)
         tableView.rowHeight = RowHeight
         tableView.bounces = false
-        tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, 0, CGFloat.min))
-        tableView.tableFooterView = UIView(frame: CGRectMake(0, 0, 0, CGFloat.min))        
-        tableView.backgroundColor = UIColor.clearColor()
+        tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: CGFloat.leastNormalMagnitude))
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: CGFloat.leastNormalMagnitude))        
+        tableView.backgroundColor = UIColor.clear
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.layer.cornerRadius = CornerRadius
         tableView.layer.masksToBounds = true
@@ -62,14 +62,14 @@ public class PopoverView: UIView {
                 maxLengthTitle = item.title
             }
         }
-        var width: CGFloat = maxLengthTitle.sizeWithFont(CellLabelFont, preferredMaxLayoutWidth: CGFloat.max).width
+        var width: CGFloat = maxLengthTitle.size(font: CellLabelFont, preferredMaxLayoutWidth: CGFloat.greatestFiniteMagnitude).width
         if width < 60 {
             width = 60
         }
         
         width += Leading * 2
         
-        if self.style == .WithImage {
+        if self.style == .withImage {
             width += ImageWidth + Spacing
         }
         
@@ -87,7 +87,7 @@ public class PopoverView: UIView {
 
     public init(_ host: PopoverController, commonSuperView: UIView) {
         if host.reverseHorizontalCoordinates {
-            self.items = host.items.reverse()
+            self.items = host.items.reversed()
         } else {
             self.items = host.items
         }
@@ -98,23 +98,23 @@ public class PopoverView: UIView {
         
         self.commonSuperView = commonSuperView
         
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
         
         setup()
     }
     
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         
         if nil != arrawView.layer.contents {
             return
         }
         
-        let color = items[0].coverColor ?? UIColor.whiteColor()
-        let arrawCenterX: CGFloat = CGRectGetMidX(fromView.frame) - CGRectGetMidX(arrawView.frame) + CGRectGetMidX(arrawView.bounds)
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
-            let image = drawArrawImageIn(
-                self.arrawView.bounds,
+        let color = items[0].coverColor ?? UIColor.white
+        let arrawCenterX: CGFloat = fromView.frame.midX - arrawView.frame.midX + arrawView.bounds.midX
+        DispatchQueue.global().async { () -> Void in
+            let image = drawArrawImage(
+                in: self.arrawView.bounds,
                 strokeColor: color,
                 fillColor: color,
                 lineWidth: LineWidth,
@@ -124,7 +124,7 @@ public class PopoverView: UIView {
                 cornerRadius: CornerRadius,
                 handstand: self.reverseHorizontalCoordinates
             )
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async(execute: { () -> Void in
                 self.arrawView.image = image
             })
         }
@@ -138,32 +138,32 @@ public class PopoverView: UIView {
         
         var clazz: AnyClass? = PopoverCell.self
         var identifier: String = PopoverCell.identifier
-        if style == .WithImage {
+        if style == .withImage {
             clazz = PopoverWihtImageCell.self
             identifier = PopoverWihtImageCell.identifier
         }
-        tableView.registerClass(clazz, forCellReuseIdentifier: identifier)
+        tableView.register(clazz, forCellReuseIdentifier: identifier)
     }
     
-    public override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if let location = touches.first?.locationInView(self) where !CGRectContainsPoint(arrawView.frame, location) {
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let location = touches.first?.location(in: self) , !arrawView.frame.contains(location) {
             dismiss()
         }
     }
     
     func dismiss() {
-        UIView.animateWithDuration(0.25, animations: { () -> Void in
+        UIView.animate(withDuration: 0.25, animations: { () -> Void in
             self.tableView.alpha = 0
             self.arrawView.alpha = 0
-        }) {_ in
+        }, completion: {_ in
             self.subviews.forEach{ $0.removeFromSuperview() }
             self.removeFromSuperview()
-        }
+        }) 
     }
     
     func addConstraints() {
-        let screenWidth: CGFloat = CGRectGetWidth(superview!.frame)
-        var centerX: CGFloat = fromView.frame.origin.x + CGRectGetWidth(fromView.bounds) / 2.0
+        let screenWidth: CGFloat = superview!.frame.width
+        var centerX: CGFloat = fromView.frame.origin.x + fromView.bounds.width / 2.0
         let rightHand = centerX - screenWidth / 2.0 > 0
         if rightHand {
             centerX = screenWidth - centerX
@@ -175,30 +175,30 @@ public class PopoverView: UIView {
             constant0 = rightHand ? distance : -distance
         }
         
-        var attribute0: NSLayoutAttribute = .Top
-        var attribute1: NSLayoutAttribute = .Bottom
+        var attribute0: NSLayoutAttribute = .top
+        var attribute1: NSLayoutAttribute = .bottom
         var constant1: CGFloat = 10
 
-        if direction == .Up {
-            attribute0 = .Bottom
-            attribute1 = .Top
+        if direction == .up {
+            attribute0 = .bottom
+            attribute1 = .top
             constant1 = -10
         }
         
         commonSuperView.addConstraints([
             NSLayoutConstraint(
                 item: tableView,
-                attribute: .CenterX,
-                relatedBy: .Equal,
+                attribute: .centerX,
+                relatedBy: .equal,
                 toItem: fromView,
-                attribute: .CenterX,
+                attribute: .centerX,
                 multiplier: 1,
                 constant: constant0
             ),
             NSLayoutConstraint(
                 item: tableView,
                 attribute: attribute0,
-                relatedBy: .Equal,
+                relatedBy: .equal,
                 toItem: fromView,
                 attribute: attribute1,
                 multiplier: 1,
@@ -206,19 +206,19 @@ public class PopoverView: UIView {
             ),
             NSLayoutConstraint(
                 item: tableView,
-                attribute: .Width,
-                relatedBy: .Equal,
+                attribute: .width,
+                relatedBy: .equal,
                 toItem: nil,
-                attribute: .NotAnAttribute,
+                attribute: .notAnAttribute,
                 multiplier: 1,
                 constant: tableViewWidth
             ),
             NSLayoutConstraint(
                 item: tableView,
-                attribute: .Height,
-                relatedBy: .Equal,
+                attribute: .height,
+                relatedBy: .equal,
                 toItem: nil,
-                attribute: .NotAnAttribute,
+                attribute: .notAnAttribute,
                 multiplier: 1,
                 constant: tableViewHeight
             )
@@ -227,37 +227,37 @@ public class PopoverView: UIView {
         commonSuperView.addConstraints([
             NSLayoutConstraint(
                 item: arrawView,
-                attribute: .Width,
-                relatedBy: .Equal,
+                attribute: .width,
+                relatedBy: .equal,
                 toItem: tableView,
-                attribute: .Width,
+                attribute: .width,
                 multiplier: 1,
                 constant: LineWidth * 2
             ),
             NSLayoutConstraint(
                 item: arrawView,
-                attribute: .Height,
-                relatedBy: .Equal,
+                attribute: .height,
+                relatedBy: .equal,
                 toItem: tableView,
-                attribute: .Height,
+                attribute: .height,
                 multiplier: 1,
                 constant: fabs(constant1) - 2
             ),
             NSLayoutConstraint(
                 item: arrawView,
-                attribute: .CenterX,
-                relatedBy: .Equal,
+                attribute: .centerX,
+                relatedBy: .equal,
                 toItem: tableView,
-                attribute: .CenterX,
+                attribute: .centerX,
                 multiplier: 1,
                 constant: 0
             ),
             NSLayoutConstraint(
                 item: arrawView,
-                attribute: .CenterY,
-                relatedBy: .Equal,
+                attribute: .centerY,
+                relatedBy: .equal,
                 toItem: tableView,
-                attribute: .CenterY,
+                attribute: .centerY,
                 multiplier: 1,
                 constant: -constant1 / 2.0
             ),            
@@ -266,36 +266,36 @@ public class PopoverView: UIView {
     
 #if DEBUG
     deinit {
-        debugPrint("\(#file):\(#line):\(self.dynamicType):\(#function)")
+        debugPrint("\(#file):\(#line):\(type(of: self)):\(#function)")
     }
 #endif
 }
 
 extension PopoverView: UITableViewDataSource {
-    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }
 
-    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if style == .WithImage {
-            guard let cell = tableView.dequeueReusableCellWithIdentifier(PopoverWihtImageCell.identifier) as? PopoverWihtImageCell else {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if style == .withImage {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: PopoverWihtImageCell.identifier) as? PopoverWihtImageCell else {
                 fatalError("Must register cell first")
             }
-            cell.setupData(items[indexPath.row])
+            cell.setupData(items[(indexPath as NSIndexPath).row])
             return cell
         } else {
-            guard let cell = tableView.dequeueReusableCellWithIdentifier(PopoverCell.identifier) as? PopoverCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: PopoverCell.identifier) as? PopoverCell else {
                 fatalError("Must register cell first")
             }
-            cell.setupData(items[indexPath.row])
+            cell.setupData(items[(indexPath as NSIndexPath).row])
             return cell
         }
     }
 }
 
 extension PopoverView: UITableViewDelegate {
-    public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let popoverItem = items[indexPath.row]
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let popoverItem = items[(indexPath as NSIndexPath).row]
         popoverItem.handler?(popoverItem)
         dismiss()
     }
