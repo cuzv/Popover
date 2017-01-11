@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 extension Double {
     var radian: CGFloat {
         return CGFloat(self / 180.0 * M_PI)
@@ -52,10 +51,8 @@ class ArrowView : UIView {
         path.addArc(withCenter: CGPoint(x: bounds.width - CornerRadius, y: CornerRadius + ArrawHeight), radius: CornerRadius, startAngle: 0.radian, endAngle: -90.radian, clockwise: false)
         
         path.addLine(to: CGPoint(x: ArrawCenterX + ArrawWidthHalf, y: ArrawHeight))
-        
-        
+
         path.close()
-        
         
         UIColor.blue.setFill()
         path.fill()
@@ -65,9 +62,6 @@ class ArrowView : UIView {
         
     }
 }
-
-
-
 
 internal func drawArrawImageIn(
     _ rect: CGRect,
