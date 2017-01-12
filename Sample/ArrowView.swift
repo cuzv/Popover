@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 extension Double {
     var radian: CGFloat {
         return CGFloat(self / 180.0 * M_PI)
@@ -36,11 +35,11 @@ class ArrowView : UIView {
         path.move(to: CGPoint(x: ArrawCenterX, y: 0))
         path.addLine(to: CGPoint(x: ArrawCenterX - ArrawWidthHalf, y: ArrawHeight))
         path.addLine(to: CGPoint(x: CornerRadius + ArrawHeight, y: ArrawHeight))
-
+        
         path.addArc(withCenter: CGPoint(x: CornerRadius, y: CornerRadius + ArrawHeight), radius: CornerRadius, startAngle: 270.radian, endAngle: 180.radian, clockwise: false)
         
         path.addLine(to: CGPoint(x: 0, y: bounds.height - CornerRadius))
-
+        
         path.addArc(withCenter: CGPoint(x: CornerRadius, y: bounds.height - CornerRadius), radius: CornerRadius, startAngle: 180.radian, endAngle: 90.radian, clockwise: false)
         
         path.addLine(to: CGPoint(x: bounds.width - CornerRadius, y: bounds.height))
@@ -48,26 +47,21 @@ class ArrowView : UIView {
         path.addArc(withCenter: CGPoint(x: bounds.width - CornerRadius, y: bounds.height - CornerRadius), radius: CornerRadius, startAngle: 90.radian, endAngle: 0.radian, clockwise: false)
         
         path.addLine(to: CGPoint(x: bounds.width, y: CornerRadius + ArrawHeight))
-
+        
         path.addArc(withCenter: CGPoint(x: bounds.width - CornerRadius, y: CornerRadius + ArrawHeight), radius: CornerRadius, startAngle: 0.radian, endAngle: -90.radian, clockwise: false)
         
         path.addLine(to: CGPoint(x: ArrawCenterX + ArrawWidthHalf, y: ArrawHeight))
 
-        
         path.close()
-        
         
         UIColor.blue.setFill()
         path.fill()
         
         UIColor.red.setStroke()
         path.stroke()
-
-    }    
+        
+    }
 }
-
-
-
 
 internal func drawArrawImageIn(
     _ rect: CGRect,
@@ -98,23 +92,18 @@ internal func drawArrawImageIn(
     let path = CGMutablePath()
     let lineHalfWidth = lineWidth / 2.0
     let arrawHalfWidth = arrawWidth / 2.0
-    CGPathMoveToPoint(path, nil, arrawCenterX, lineWidth)
-    CGPathAddLineToPoint(path, nil, arrawCenterX - arrawHalfWidth, arrawHeight + lineWidth)
-    CGPathAddLineToPoint(path, nil, cornerRadius + arrawHeight, arrawHeight + lineWidth)
+    path.move(to: CGPoint(x: arrawCenterX, y: lineWidth))
+    path.addLine(to: CGPoint(x: arrawCenterX - arrawHalfWidth, y: arrawHeight + lineWidth))
+    path.addLine(to: CGPoint(x: cornerRadius + arrawHeight, y: arrawHeight + lineWidth))
+    path.addArc(center:  CGPoint(x:cornerRadius + lineHalfWidth, y:cornerRadius + arrawHeight + lineWidth), radius: cornerRadius, startAngle: 270.radian, endAngle: 180.radian, clockwise: true)
+    path.addLine(to: CGPoint(x: lineHalfWidth, y: rect.height - cornerRadius - lineHalfWidth))
+    path.addArc(center:  CGPoint(x:cornerRadius + lineHalfWidth, y:rect.height - cornerRadius - lineHalfWidth), radius: cornerRadius, startAngle: 180.radian, endAngle: 90.radian, clockwise: true)
+    path.addLine(to: CGPoint(x: rect.width - cornerRadius - lineHalfWidth, y:  rect.height - lineHalfWidth))
+    path.addArc(center:  CGPoint(x:rect.width - cornerRadius - lineHalfWidth, y: rect.height - cornerRadius - lineHalfWidth), radius: cornerRadius, startAngle: 90.radian, endAngle: 0.radian, clockwise: true)
+    path.addLine(to: CGPoint(x: rect.width - lineHalfWidth, y: arrawHeight + cornerRadius + lineWidth / 2))
+    path.addArc(center:  CGPoint(x:rect.width - cornerRadius - lineHalfWidth, y:cornerRadius + arrawHeight + lineWidth), radius: cornerRadius, startAngle: 0.radian, endAngle: -90.radian, clockwise: true)
+    path.addLine(to: CGPoint(x: arrawCenterX + arrawHalfWidth, y: arrawHeight + lineWidth))
     
-    CGPathAddArc(path, nil, cornerRadius + lineHalfWidth, cornerRadius + arrawHeight + lineWidth, cornerRadius, 270.radian, 180.radian, true)
-    CGPathAddLineToPoint(path, nil, lineHalfWidth, rect.height - cornerRadius - lineHalfWidth)
-    CGPathAddArc(path, nil, cornerRadius + lineHalfWidth, rect.height - cornerRadius - lineHalfWidth, cornerRadius, 180.radian, 90.radian, true)
-    CGPathAddLineToPoint(path, nil, rect.width - cornerRadius - lineHalfWidth, rect.height - lineHalfWidth)
-    
-    
-    CGPathAddArc(path, nil, rect.width - cornerRadius - lineHalfWidth, rect.height - cornerRadius - lineHalfWidth, cornerRadius, 90.radian, 0.radian, true)
-    
-    CGPathAddLineToPoint(path, nil, rect.width - lineHalfWidth, arrawHeight + cornerRadius + lineWidth / 2)
-    
-    CGPathAddArc(path, nil, rect.width - cornerRadius - lineHalfWidth, cornerRadius + arrawHeight + lineWidth, cornerRadius, 0.radian, -90.radian, true)
-
-    CGPathAddLineToPoint(path, nil, arrawCenterX + arrawHalfWidth, arrawHeight + lineWidth)
     path.closeSubpath()
     
     context!.addPath(path)
@@ -125,15 +114,3 @@ internal func drawArrawImageIn(
     
     return output!
 }
-
-
-
-
-
-
-
-
-
-
-
-
