@@ -4,10 +4,8 @@ Popover is an UIPopoverController like control for iOS.
 ### How does it look like?
 
 <p align="left">
-
-<img src="./ScreenShoots/1.gif" width=40%"> 
+<img src="./ScreenShoots/1.gif" width=40%">
 <img src="./ScreenShoots/2.gif" width=40%"> 
-
 </p>
 
 ### How to use
