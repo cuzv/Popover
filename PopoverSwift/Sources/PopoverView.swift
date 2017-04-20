@@ -29,6 +29,7 @@ import UIKit
 open class PopoverView: UIView {
     fileprivate let items: [PopoverItem]
     fileprivate let fromView: UIView
+    fileprivate let initialIndex: Int
     fileprivate let direction: Direction
     fileprivate let reverseHorizontalCoordinates: Bool
     fileprivate let style: PopoverStyle
@@ -92,6 +93,7 @@ open class PopoverView: UIView {
             self.items = host.items
         }
         self.fromView = host.fromView
+        self.initialIndex = host.initialIndex
         self.direction = host.direction
         self.reverseHorizontalCoordinates = host.reverseHorizontalCoordinates
         self.style = host.style
@@ -128,6 +130,8 @@ open class PopoverView: UIView {
                 self.arrawView.image = image
             })
         }
+        
+        tableView.scrollToRow(at: IndexPath(row: initialIndex, section: 0), at: .top, animated: false)
     }
 
     func setup() {

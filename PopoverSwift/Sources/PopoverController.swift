@@ -48,6 +48,8 @@ public final class PopoverController {
         }
     }
     
+    public var initialIndex: Int = 0
+    
     public init(
         items: [PopoverItem],
         fromView: UIView,
@@ -57,6 +59,22 @@ public final class PopoverController {
     {
         self.items = items
         self.fromView = fromView
+        self.direction = direction
+        self.reverseHorizontalCoordinates = reverseHorizontalCoordinates
+        self.style = style
+    }
+    
+    public init(
+        items: [PopoverItem],
+        fromView: UIView,
+        direction: Direction = .down,
+        reverseHorizontalCoordinates: Bool = false,
+        style: PopoverStyle = .normal,
+        initialIndex: Int = 0)
+    {
+        self.items = items
+        self.fromView = fromView
+        self.initialIndex = initialIndex
         self.direction = direction
         self.reverseHorizontalCoordinates = reverseHorizontalCoordinates
         self.style = style

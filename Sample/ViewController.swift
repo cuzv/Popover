@@ -47,9 +47,14 @@ class ViewController: UIViewController {
         let item3 = PopoverItem(title: "收付款", image: image) { debugPrint($0.title) }
         return [item0, item1, item2, item3]
     }
+    
+    func makeHugeItems() -> [PopoverItem] {
+        let image = UIImage(named: "collection_hightlight")
+        return (0..<100).map { PopoverItem(title: "Item #\($0+1)", image: image) }
+    }
 
     @IBAction func centerTopAction(_ sender: AnyObject) {
-        let controller = PopoverController(items: makeItems(), fromView: centerButton, style: .withImage)
+        let controller = PopoverController(items: makeHugeItems(), fromView: centerButton, style: .withImage, initialIndex: 50)
         controller.coverColor = UIColor.gray
         controller.textColor = UIColor.white
         popover(controller)
