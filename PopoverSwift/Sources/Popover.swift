@@ -49,7 +49,7 @@ internal struct AssociationKey {
 
 /// Convert a `void *` type to Swift type, use this function carefully
 private func convertUnsafePointerToSwiftType<T>(_ value: UnsafeRawPointer) -> T {
-    return unsafeBitCast(value, to: UnsafePointer<T>.self).pointee
+    return value.assumingMemoryBound(to: T.self).pointee
 }
 
 internal extension UIViewController {
@@ -73,7 +73,7 @@ internal extension String {
 
 internal extension Double {
     var radian: CGFloat {
-        return CGFloat(self / 180.0 * M_PI)
+        return CGFloat(self / 180.0 * Double.pi)
     }
 }
 

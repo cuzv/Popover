@@ -15,3 +15,8 @@
 ### 0.3.1
 
 - 修复String.length
+
+### 2.0.1
+
+- merge pr #6
+- adapt for swift 3.1

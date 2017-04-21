@@ -10,7 +10,7 @@ import UIKit
 
 extension Double {
     var radian: CGFloat {
-        return CGFloat(self / 180.0 * M_PI)
+        return CGFloat(self / 180.0 * Double.pi)
     }
 }
 
