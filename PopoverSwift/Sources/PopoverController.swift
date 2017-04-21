@@ -32,7 +32,8 @@ public final class PopoverController {
     internal let direction: Direction
     internal let reverseHorizontalCoordinates: Bool
     internal let style: PopoverStyle
-    
+    internal let initialIndex: Int
+
     public var coverColor: UIColor? {
         didSet {
             self.items.forEach { (item: PopoverItem) -> () in
@@ -48,22 +49,6 @@ public final class PopoverController {
         }
     }
     
-    public var initialIndex: Int = 0
-    
-    public init(
-        items: [PopoverItem],
-        fromView: UIView,
-        direction: Direction = .down,
-        reverseHorizontalCoordinates: Bool = false,
-        style: PopoverStyle = .normal)
-    {
-        self.items = items
-        self.fromView = fromView
-        self.direction = direction
-        self.reverseHorizontalCoordinates = reverseHorizontalCoordinates
-        self.style = style
-    }
-    
     public init(
         items: [PopoverItem],
         fromView: UIView,
@@ -72,12 +57,15 @@ public final class PopoverController {
         style: PopoverStyle = .normal,
         initialIndex: Int = 0)
     {
+        if 0 > initialIndex || initialIndex >= items.count {
+            fatalError("initialIndex(\(initialIndex)) out of boundary.")
+        }
         self.items = items
         self.fromView = fromView
-        self.initialIndex = initialIndex
         self.direction = direction
         self.reverseHorizontalCoordinates = reverseHorizontalCoordinates
         self.style = style
+        self.initialIndex = initialIndex
     }
     
 #if DEBUG
