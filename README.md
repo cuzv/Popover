@@ -21,7 +21,7 @@ let item2 = PopoverItem(title: "扫一扫", image: image) { debugPrint($0.title)
 let item3 = PopoverItem(title: "收付款", image: image) { debugPrint($0.title) }
 let items = [item0, item1, item2, item3]
 
-let controller = PopoverController(items: items, fromView: rightTopButton, direction: .Down, style: .WithImage)
+let controller = PopoverController(items: items, fromView: rightTopButton, direction: .down, style: .withImage)
 popover(controller)        
 ```
 ### Notice

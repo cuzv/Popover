@@ -20,3 +20,7 @@
 
 - merge pr #6
 - adapt for swift 3.1
+
+### 2.0.2
+
+- dismiss timing

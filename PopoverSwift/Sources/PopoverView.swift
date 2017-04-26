@@ -149,19 +149,20 @@ open class PopoverView: UIView {
         tableView.register(clazz, forCellReuseIdentifier: identifier)
     }
     
-    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let location = touches.first?.location(in: self) , !arrawView.frame.contains(location) {
             dismiss()
         }
     }
     
-    func dismiss() {
+    func dismiss(completion: (() -> ())? = nil) {
         UIView.animate(withDuration: 0.25, animations: { () -> Void in
             self.tableView.alpha = 0
             self.arrawView.alpha = 0
         }, completion: {_ in
             self.subviews.forEach{ $0.removeFromSuperview() }
             self.removeFromSuperview()
+            completion?()
         }) 
     }
     
@@ -300,7 +301,8 @@ extension PopoverView: UITableViewDataSource {
 extension PopoverView: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let popoverItem = items[(indexPath as NSIndexPath).row]
-        popoverItem.handler?(popoverItem)
-        dismiss()
+        dismiss {
+            popoverItem.handler?(popoverItem)
+        }
     }
 }
