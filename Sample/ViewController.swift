@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  Sample
 //
-//  Created by Moch Xiao on 3/18/16.
-//  Copyright © 2016 mochxiao.com. All rights reserved.
+//  Created by Roy Shaw on 3/18/16.
+//  Copyright © 2016 Red Rain. All rights reserved.
 //
 
 import UIKit

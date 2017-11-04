@@ -2,8 +2,8 @@
 //  ArrowView.swift
 //  PopoverSwift
 //
-//  Created by Moch Xiao on 3/19/16.
-//  Copyright © 2016 mochxiao.com. All rights reserved.
+//  Created by Roy Shaw on 3/19/16.
+//  Copyright © 2016 Red Rain. All rights reserved.
 //
 
 import UIKit
