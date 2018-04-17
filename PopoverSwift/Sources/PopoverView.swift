@@ -114,22 +114,18 @@ open class PopoverView: UIView {
         
         let color = items[0].coverColor ?? UIColor.white
         let arrawCenterX: CGFloat = fromView.frame.midX - arrawView.frame.midX + arrawView.bounds.midX
-        DispatchQueue.global().async { () -> Void in
-            let image = drawArrawImage(
-                in: self.arrawView.bounds,
-                strokeColor: color,
-                fillColor: color,
-                lineWidth: LineWidth,
-                arrawCenterX: arrawCenterX,
-                arrawWidth: 10,
-                arrawHeight: 10,
-                cornerRadius: CornerRadius,
-                handstand: self.reverseHorizontalCoordinates
-            )
-            DispatchQueue.main.async(execute: { () -> Void in
-                self.arrawView.image = image
-            })
-        }
+        let image = drawArrawImage(
+            in: self.arrawView.bounds,
+            strokeColor: color,
+            fillColor: color,
+            lineWidth: LineWidth,
+            arrawCenterX: arrawCenterX,
+            arrawWidth: 10,
+            arrawHeight: 10,
+            cornerRadius: CornerRadius,
+            handstand: self.reverseHorizontalCoordinates
+        )
+        self.arrawView.image = image
         
         tableView.scrollToRow(at: IndexPath(row: initialIndex, section: 0), at: .top, animated: false)
     }
