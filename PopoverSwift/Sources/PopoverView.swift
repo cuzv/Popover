@@ -114,9 +114,10 @@ open class PopoverView: UIView {
         
         let color = items[0].coverColor ?? UIColor.white
         let arrawCenterX: CGFloat = fromView.frame.midX - arrawView.frame.midX + arrawView.bounds.midX
+        let bounds = arrawView.bounds
         DispatchQueue.global().async { () -> Void in
             let image = drawArrawImage(
-                in: self.arrawView.bounds,
+                in: bounds,
                 strokeColor: color,
                 fillColor: color,
                 lineWidth: LineWidth,

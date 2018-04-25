@@ -24,3 +24,7 @@
 ### 2.0.2
 
 - dismiss timing
+
+### 2.0.3
+
+- Fix main thread running.
