@@ -29,7 +29,7 @@ class ViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(ViewController.add(_:)))
     }
     
-    func add(_ sender: UIBarButtonItem) {
+    @objc func add(_ sender: UIBarButtonItem) {
         if popoverDidAppear {
             dismissPopover()
         } else {

@@ -25,6 +25,7 @@
 
 - dismiss timing
 
-### 2.0.3
+### 3.0.0
 
 - Fix main thread running.
+- Support Swift 4.1

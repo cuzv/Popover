@@ -61,13 +61,13 @@ internal extension UIViewController {
 
 internal extension String {
     internal var length: Int {
-        return characters.count
+        return lengthOfBytes(using: String.Encoding.utf8)
     }
     
     internal func size(font: UIFont, preferredMaxLayoutWidth: CGFloat) -> CGSize {
         let str = self as NSString
         let options: NSStringDrawingOptions = [.usesLineFragmentOrigin, .usesFontLeading, .truncatesLastVisibleLine]
-        return str.boundingRect(with: CGSize(width: preferredMaxLayoutWidth, height: CGFloat.greatestFiniteMagnitude), options: options, attributes: [NSFontAttributeName: font], context: nil).size
+        return str.boundingRect(with: CGSize(width: preferredMaxLayoutWidth, height: CGFloat.greatestFiniteMagnitude), options: options, attributes: [NSAttributedStringKey.font: font], context: nil).size
     }
 }
 
