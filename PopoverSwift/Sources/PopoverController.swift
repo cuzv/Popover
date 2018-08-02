@@ -33,6 +33,7 @@ public final class PopoverController {
     internal let reverseHorizontalCoordinates: Bool
     internal let style: PopoverStyle
     internal let initialIndex: Int
+    internal var dismissHandler: (() -> ())?
 
     public var coverColor: UIColor? {
         didSet {
@@ -55,7 +56,8 @@ public final class PopoverController {
         direction: Direction = .down,
         reverseHorizontalCoordinates: Bool = false,
         style: PopoverStyle = .normal,
-        initialIndex: Int = 0)
+        initialIndex: Int = 0,
+        dismissHandler: (() -> ())? = nil)
     {
         if 0 > initialIndex || initialIndex >= items.count {
             fatalError("initialIndex(\(initialIndex)) out of boundary.")
@@ -66,6 +68,7 @@ public final class PopoverController {
         self.reverseHorizontalCoordinates = reverseHorizontalCoordinates
         self.style = style
         self.initialIndex = initialIndex
+        self.dismissHandler = dismissHandler
     }
     
 #if DEBUG

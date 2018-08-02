@@ -33,6 +33,7 @@ open class PopoverView: UIView {
     fileprivate let direction: Direction
     fileprivate let reverseHorizontalCoordinates: Bool
     fileprivate let style: PopoverStyle
+    fileprivate let dismissHandler: (() -> ())?
     
     fileprivate weak var commonSuperView: UIView!
     
@@ -97,6 +98,7 @@ open class PopoverView: UIView {
         self.direction = host.direction
         self.reverseHorizontalCoordinates = host.reverseHorizontalCoordinates
         self.style = host.style
+        self.dismissHandler = host.dismissHandler
         
         self.commonSuperView = commonSuperView
         
@@ -163,6 +165,7 @@ open class PopoverView: UIView {
         }, completion: {_ in
             self.subviews.forEach{ $0.removeFromSuperview() }
             self.removeFromSuperview()
+            self.dismissHandler?()
             completion?()
         }) 
     }
