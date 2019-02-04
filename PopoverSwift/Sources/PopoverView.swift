@@ -184,8 +184,8 @@ open class PopoverView: UIView {
             constant0 = rightHand ? distance : -distance
         }
         
-        var attribute0: NSLayoutAttribute = .top
-        var attribute1: NSLayoutAttribute = .bottom
+        var attribute0: LayoutAttribute = .top
+        var attribute1: LayoutAttribute = .bottom
         var constant1: CGFloat = 10
 
         if direction == .up {
@@ -250,7 +250,7 @@ open class PopoverView: UIView {
                 toItem: tableView,
                 attribute: .height,
                 multiplier: 1,
-                constant: fabs(constant1) - 2
+                constant: abs(constant1) - 2
             ),
             NSLayoutConstraint(
                 item: arrawView,

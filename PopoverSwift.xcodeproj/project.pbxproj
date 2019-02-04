@@ -22,6 +22,7 @@
 		466044711CA132EA001293FE /* UIViewControler+Popover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466044691CA132EA001293FE /* UIViewControler+Popover.swift */; };
 		46D2D6F21CF57FF700D845EB /* PopoverSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4615EE521C9B0D7F00509981 /* PopoverSwift.framework */; };
 		46D2D6F31CF57FF700D845EB /* PopoverSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4615EE521C9B0D7F00509981 /* PopoverSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		66AD6A282208723B00CEBB86 /* TypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AD6A272208723B00CEBB86 /* TypeAliases.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		466044671CA132EA001293FE /* PopoverItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PopoverItem.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		466044681CA132EA001293FE /* PopoverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PopoverView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		466044691CA132EA001293FE /* UIViewControler+Popover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "UIViewControler+Popover.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		66AD6A272208723B00CEBB86 /* TypeAliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAliases.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 				466044671CA132EA001293FE /* PopoverItem.swift */,
 				466044681CA132EA001293FE /* PopoverView.swift */,
 				466044691CA132EA001293FE /* UIViewControler+Popover.swift */,
+				66AD6A272208723B00CEBB86 /* TypeAliases.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				4660446F1CA132EA001293FE /* PopoverItem.swift in Sources */,
 				466044711CA132EA001293FE /* UIViewControler+Popover.swift in Sources */,
 				466044701CA132EA001293FE /* PopoverView.swift in Sources */,
+				66AD6A282208723B00CEBB86 /* TypeAliases.swift in Sources */,
 				4660446D1CA132EA001293FE /* PopoverCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -435,7 +439,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -457,7 +461,7 @@
 				PRODUCT_NAME = PopoverSwift;
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

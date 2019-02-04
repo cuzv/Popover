@@ -39,7 +39,7 @@ internal final class PopoverCell: UITableViewCell {
         return label
     }()
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: TableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUserInterface()
     }
@@ -49,14 +49,18 @@ internal final class PopoverCell: UITableViewCell {
     }
 
     fileprivate func setupUserInterface() {
+        #if swift(>=4.2)
+        separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
+        #else
         separatorInset = UIEdgeInsetsMake(0, 15, 0, 15)
+        #endif
         backgroundColor = UIColor.clear
         
         contentView.addSubview(contentLabel)
         contentView.addConstraints(
             NSLayoutConstraint.constraints(
                 withVisualFormat: "|-\(Leading)-[contentLabel]-\(Leading)-|",
-                options: NSLayoutFormatOptions(),
+                options: LayoutFormatOptions(),
                 metrics: nil,
                 views: ["contentLabel": contentLabel]
             )
@@ -64,7 +68,7 @@ internal final class PopoverCell: UITableViewCell {
         contentView.addConstraints(
             NSLayoutConstraint.constraints(
                 withVisualFormat: "V:|-0-[contentLabel]-0-|",
-                options: NSLayoutFormatOptions(),
+                options: LayoutFormatOptions(),
                 metrics: nil,
                 views: ["contentLabel": contentLabel]
             )
@@ -110,7 +114,7 @@ final class PopoverWihtImageCell: UITableViewCell {
     }()
     
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: TableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUserInterface()
     }
@@ -120,7 +124,11 @@ final class PopoverWihtImageCell: UITableViewCell {
     }
 
     fileprivate func setupUserInterface() {
+        #if swift(>=4.2)
+        separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
+        #else
         separatorInset = UIEdgeInsetsMake(0, 15, 0, 15)
+        #endif
         backgroundColor = UIColor.clear
         
         contentView.addSubview(contentLabel)
@@ -128,7 +136,7 @@ final class PopoverWihtImageCell: UITableViewCell {
         contentView.addConstraints(
             NSLayoutConstraint.constraints(
                 withVisualFormat: "|-\(Leading)-[leftImageView(\(ImageWidth))]-\(Spacing)-[contentLabel]-\(Leading)-|",
-                options: NSLayoutFormatOptions(),
+                options: LayoutFormatOptions(),
                 metrics: nil,
                 views: ["contentLabel": contentLabel, "leftImageView": leftImageView]
             )
@@ -136,7 +144,7 @@ final class PopoverWihtImageCell: UITableViewCell {
         contentView.addConstraints(
             NSLayoutConstraint.constraints(
                 withVisualFormat: "V:|-0-[contentLabel]-0-|",
-                options: NSLayoutFormatOptions(),
+                options: LayoutFormatOptions(),
                 metrics: nil,
                 views: ["contentLabel": contentLabel]
             )
