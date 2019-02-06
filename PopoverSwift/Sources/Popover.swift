@@ -26,7 +26,7 @@
 
 import UIKit
 
-let CellLabelFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
+let CellLabelFont = UIFont.preferredFont(forTextStyle: FontTextStyle.subheadline)
 let Leading: CGFloat = 20
 let Spacing: CGFloat = 14
 let ImageWidth: CGFloat = 20
@@ -67,7 +67,7 @@ internal extension String {
     internal func size(font: UIFont, preferredMaxLayoutWidth: CGFloat) -> CGSize {
         let str = self as NSString
         let options: NSStringDrawingOptions = [.usesLineFragmentOrigin, .usesFontLeading, .truncatesLastVisibleLine]
-        return str.boundingRect(with: CGSize(width: preferredMaxLayoutWidth, height: CGFloat.greatestFiniteMagnitude), options: options, attributes: [NSAttributedStringKey.font: font], context: nil).size
+        return str.boundingRect(with: CGSize(width: preferredMaxLayoutWidth, height: CGFloat.greatestFiniteMagnitude), options: options, attributes: [AttributedStringKey.font: font], context: nil).size
     }
 }
 

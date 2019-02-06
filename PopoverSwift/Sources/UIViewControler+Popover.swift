@@ -51,7 +51,7 @@ public extension UIViewController {
         view.addConstraints(
             NSLayoutConstraint.constraints(
                 withVisualFormat: "|[popoverView]|",
-                options: NSLayoutFormatOptions(),
+                options: LayoutFormatOptions(),
                 metrics: nil,
                 views: ["popoverView": popoverView]
             )
@@ -59,7 +59,7 @@ public extension UIViewController {
         view.addConstraints(
             NSLayoutConstraint.constraints(
                 withVisualFormat: "V:|[popoverView]|",
-                options: NSLayoutFormatOptions(),
+                options: LayoutFormatOptions(),
                 metrics: nil,
                 views: ["popoverView": popoverView]
             )
