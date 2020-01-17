@@ -33,33 +33,33 @@ open class PopoverView: UIView {
     fileprivate let direction: Direction
     fileprivate let reverseHorizontalCoordinates: Bool
     fileprivate let style: PopoverStyle
-    fileprivate let dismissHandler: (() -> ())?
-    
+    fileprivate let dismissHandler: (() -> Void)?
+
     fileprivate weak var commonSuperView: UIView!
-    
+
     let arrawView: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
+
     let tableView: UITableView = {
         let tableView = UITableView(frame: CGRect.zero, style: .plain)
         tableView.rowHeight = RowHeight
         tableView.bounces = false
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: CGFloat.leastNormalMagnitude))
-        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: CGFloat.leastNormalMagnitude))        
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: CGFloat.leastNormalMagnitude))
         tableView.backgroundColor = UIColor.clear
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.layer.cornerRadius = CornerRadius
         tableView.layer.masksToBounds = true
-        
+
         return tableView
     }()
-    
+
     lazy var tableViewWidth: CGFloat = {
         var maxLengthTitle: String = ""
-        self.items.forEach { (item: PopoverItem) -> () in
+        self.items.forEach { (item: PopoverItem) -> Void in
             if item.title.length > maxLengthTitle.length {
                 maxLengthTitle = item.title
             }
@@ -68,16 +68,16 @@ open class PopoverView: UIView {
         if width < 60 {
             width = 60
         }
-        
+
         width += Leading * 2
-        
+
         if self.style == .withImage {
             width += ImageWidth + Spacing
         }
-        
+
         return width
     }()
-    
+
     lazy var tableViewHeight: CGFloat = {
         let count = self.items.count > MaxRowCount ? MaxRowCount : self.items.count
         return CGFloat(count) * RowHeight
@@ -99,21 +99,21 @@ open class PopoverView: UIView {
         self.reverseHorizontalCoordinates = host.reverseHorizontalCoordinates
         self.style = host.style
         self.dismissHandler = host.dismissHandler
-        
+
         self.commonSuperView = commonSuperView
-        
+
         super.init(frame: CGRect.zero)
-        
+
         setup()
     }
-    
+
     open override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         if nil != arrawView.layer.contents {
             return
         }
-        
+
         let color = items[0].coverColor ?? UIColor.white
         let arrawCenterX: CGFloat = fromView.frame.midX - arrawView.frame.midX + arrawView.bounds.midX
         let bounds = arrawView.bounds
@@ -133,7 +133,7 @@ open class PopoverView: UIView {
                 self.arrawView.image = image
             })
         }
-        
+
         tableView.scrollToRow(at: IndexPath(row: initialIndex, section: 0), at: .top, animated: false)
     }
 
@@ -142,7 +142,7 @@ open class PopoverView: UIView {
         tableView.dataSource = self
         addSubview(arrawView)
         addSubview(tableView)
-        
+
         var clazz: AnyClass? = PopoverCell.self
         var identifier: String = PopoverCell.identifier
         if style == .withImage {
@@ -151,25 +151,25 @@ open class PopoverView: UIView {
         }
         tableView.register(clazz, forCellReuseIdentifier: identifier)
     }
-    
+
     open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let location = touches.first?.location(in: self) , !arrawView.frame.contains(location) {
+        if let location = touches.first?.location(in: self), !arrawView.frame.contains(location) {
             dismiss()
         }
     }
-    
-    func dismiss(completion: (() -> ())? = nil) {
+
+    func dismiss(completion: (() -> Void)? = nil) {
         UIView.animate(withDuration: 0.25, animations: { () -> Void in
             self.tableView.alpha = 0
             self.arrawView.alpha = 0
         }, completion: {_ in
-            self.subviews.forEach{ $0.removeFromSuperview() }
+            self.subviews.forEach { $0.removeFromSuperview() }
             self.removeFromSuperview()
             self.dismissHandler?()
             completion?()
-        }) 
+        })
     }
-    
+
     func addConstraints() {
         let screenWidth: CGFloat = superview!.frame.width
         var centerX: CGFloat = fromView.frame.origin.x + fromView.bounds.width / 2.0
@@ -177,13 +177,13 @@ open class PopoverView: UIView {
         if rightHand {
             centerX = screenWidth - centerX
         }
-        
+
         var constant0: CGFloat = 0
         let distance = centerX - (tableViewWidth / 2.0 + 6)
         if distance <= 0 {
             constant0 = rightHand ? distance : -distance
         }
-        
+
         var attribute0: LayoutAttribute = .top
         var attribute1: LayoutAttribute = .bottom
         var constant1: CGFloat = 10
@@ -193,7 +193,7 @@ open class PopoverView: UIView {
             attribute1 = .top
             constant1 = -10
         }
-        
+
         commonSuperView.addConstraints([
             NSLayoutConstraint(
                 item: tableView,
@@ -232,7 +232,7 @@ open class PopoverView: UIView {
                 constant: tableViewHeight
             )
         ])
-        
+
         commonSuperView.addConstraints([
             NSLayoutConstraint(
                 item: arrawView,
@@ -269,10 +269,10 @@ open class PopoverView: UIView {
                 attribute: .centerY,
                 multiplier: 1,
                 constant: -constant1 / 2.0
-            ),            
+            )
         ])
     }
-    
+
 #if DEBUG
     deinit {
         debugPrint("\(#file):\(#line):\(type(of: self)):\(#function)")

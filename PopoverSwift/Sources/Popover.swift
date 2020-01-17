@@ -52,18 +52,18 @@ private func convertUnsafePointerToSwiftType<T>(_ value: UnsafeRawPointer) -> T 
     return value.assumingMemoryBound(to: T.self).pointee
 }
 
-internal extension UIViewController {
+extension UIViewController {
     internal var popoverView: PopoverView? {
         get { return objc_getAssociatedObject(self, &AssociationKey.PopoverView) as? PopoverView }
         set { objc_setAssociatedObject(self, &AssociationKey.PopoverView, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
     }
 }
 
-internal extension String {
+extension String {
     internal var length: Int {
         return lengthOfBytes(using: String.Encoding.utf8)
     }
-    
+
     internal func size(font: UIFont, preferredMaxLayoutWidth: CGFloat) -> CGSize {
         let str = self as NSString
         let options: NSStringDrawingOptions = [.usesLineFragmentOrigin, .usesFontLeading, .truncatesLastVisibleLine]
@@ -71,8 +71,8 @@ internal extension String {
     }
 }
 
-internal extension Double {
-    var radian: CGFloat {
+extension Double {
+    internal var radian: CGFloat {
         return CGFloat(self / 180.0 * Double.pi)
     }
 }
@@ -87,8 +87,7 @@ internal func drawArrawImage(
     arrawHeight: CGFloat = 10,
     cornerRadius: CGFloat = 6,
     handstand: Bool = false
-    ) -> UIImage?
-{
+    ) -> UIImage? {
     UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
     guard let context = UIGraphicsGetCurrentContext() else {
         return nil
@@ -99,12 +98,12 @@ internal func drawArrawImage(
         context.translateBy(x: 0, y: rect.height)
         context.scaleBy(x: 1.0, y: -1.0)
     }
-    
+
     // Perform the drawing
     context.setLineWidth(lineWidth)
     context.setStrokeColor(strokeColor.cgColor)
     context.setFillColor(fillColor.cgColor)
-    
+
     let path = CGMutablePath()
     let lineHalfWidth = lineWidth / 2.0
     let arrawHalfWidth = arrawWidth / 2.0
@@ -119,15 +118,15 @@ internal func drawArrawImage(
     path.addLine(to: CGPoint(x: rect.width - lineHalfWidth, y: arrawHeight + cornerRadius + lineHalfWidth))
     path.addArc(center: CGPoint(x: rect.width - cornerRadius - lineHalfWidth, y: cornerRadius + arrawHeight + lineWidth), radius: cornerRadius, startAngle: 0.radian, endAngle: (-90).radian, clockwise: true)
     path.addLine(to: CGPoint(x: arrawCenterX + arrawHalfWidth, y: arrawHeight + lineWidth))
-    
+
     path.closeSubpath()
-    
+
     context.addPath(path)
     context.drawPath(using: .fillStroke)
-    
+
     let output = UIGraphicsGetImageFromCurrentImageContext()
-    
+
     UIGraphicsEndImageContext()
-    
+
     return output!
 }

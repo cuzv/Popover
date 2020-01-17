@@ -33,23 +33,23 @@ public final class PopoverController {
     internal let reverseHorizontalCoordinates: Bool
     internal let style: PopoverStyle
     internal let initialIndex: Int
-    internal var dismissHandler: (() -> ())?
+    internal var dismissHandler: (() -> Void)?
 
     public var coverColor: UIColor? {
         didSet {
-            self.items.forEach { (item: PopoverItem) -> () in
+            self.items.forEach { (item: PopoverItem) -> Void in
                 item.coverColor = coverColor
             }
         }
     }
     public var textColor: UIColor? {
         didSet {
-            self.items.forEach { (item: PopoverItem) -> () in
+            self.items.forEach { (item: PopoverItem) -> Void in
                 item.textColor = textColor
             }
         }
     }
-    
+
     public init(
         items: [PopoverItem],
         fromView: UIView,
@@ -57,8 +57,7 @@ public final class PopoverController {
         reverseHorizontalCoordinates: Bool = false,
         style: PopoverStyle = .normal,
         initialIndex: Int = 0,
-        dismissHandler: (() -> ())? = nil)
-    {
+        dismissHandler: (() -> Void)? = nil) {
         if 0 > initialIndex || initialIndex >= items.count {
             fatalError("initialIndex(\(initialIndex)) out of boundary.")
         }
@@ -70,7 +69,7 @@ public final class PopoverController {
         self.initialIndex = initialIndex
         self.dismissHandler = dismissHandler
     }
-    
+
 #if DEBUG
     deinit {
         debugPrint("\(#file):\(#line):\(type(of: self)):\(#function)")

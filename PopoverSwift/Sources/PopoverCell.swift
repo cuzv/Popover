@@ -38,7 +38,7 @@ internal final class PopoverCell: UITableViewCell {
         label.backgroundColor = UIColor.clear
         return label
     }()
-    
+
     override init(style: TableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUserInterface()
@@ -52,10 +52,10 @@ internal final class PopoverCell: UITableViewCell {
         #if swift(>=4.2)
         separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         #else
-        separatorInset = UIEdgeInsetsMake(0, 15, 0, 15)
+        separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         #endif
         backgroundColor = UIColor.clear
-        
+
         contentView.addSubview(contentLabel)
         contentView.addConstraints(
             NSLayoutConstraint.constraints(
@@ -74,13 +74,13 @@ internal final class PopoverCell: UITableViewCell {
             )
         )
     }
-    
+
     func setupData(_ data: PopoverItem) {
         contentLabel.text = data.title
         if let textColor = data.textColor {
             contentLabel.textColor = textColor
         }
-        
+
         contentView.backgroundColor = data.coverColor ?? UIColor.white
     }
 
@@ -91,10 +91,9 @@ internal final class PopoverCell: UITableViewCell {
 #endif
 }
 
-
 final class PopoverWihtImageCell: UITableViewCell {
     static let identifier: String = "PopoverWihtImageCell"
-    
+
     internal let contentLabel: UILabel = {
         let label = UILabel()
         label.font = CellLabelFont
@@ -103,7 +102,7 @@ final class PopoverWihtImageCell: UITableViewCell {
         label.backgroundColor = UIColor.clear
         return label
     }()
-    
+
     internal let leftImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -112,13 +111,12 @@ final class PopoverWihtImageCell: UITableViewCell {
         imageView.backgroundColor = UIColor.clear
         return imageView
     }()
-    
-    
+
     override init(style: TableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUserInterface()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -127,10 +125,10 @@ final class PopoverWihtImageCell: UITableViewCell {
         #if swift(>=4.2)
         separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         #else
-        separatorInset = UIEdgeInsetsMake(0, 15, 0, 15)
+        separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         #endif
         backgroundColor = UIColor.clear
-        
+
         contentView.addSubview(contentLabel)
         contentView.addSubview(leftImageView)
         contentView.addConstraints(
@@ -161,7 +159,7 @@ final class PopoverWihtImageCell: UITableViewCell {
             )
         )
     }
-    
+
     func setupData(_ data: PopoverItem) {
         contentLabel.text = data.title
         if let textColor = data.textColor {
@@ -177,5 +175,3 @@ final class PopoverWihtImageCell: UITableViewCell {
     }
 #endif
 }
-
-

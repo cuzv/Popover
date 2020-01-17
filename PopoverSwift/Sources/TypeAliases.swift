@@ -6,7 +6,7 @@
 //  Copyright © 2019 mochxiao.com. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 #if swift(>=4.2)
 typealias FontTextStyle = UIFont.TextStyle

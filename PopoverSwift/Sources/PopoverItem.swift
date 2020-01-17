@@ -24,7 +24,7 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
+import UIKit
 
 public final class PopoverItem {
     public let title: String
@@ -33,7 +33,7 @@ public final class PopoverItem {
     public let handler: ((PopoverItem) -> Void)?
     var coverColor: UIColor?
     var textColor: UIColor?
-    
+
     public init(title: String, titleColor: UIColor = UIColor.black, image: UIImage? = nil, handler: ((PopoverItem) -> Void)? = nil) {
         self.title = title
         self.titleColor = titleColor
